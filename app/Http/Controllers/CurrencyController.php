@@ -2,45 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ApiConnectionException;
-use App\Models\CurrencyExchange;
-use Illuminate\Http\Client\RequestException;
-use Illuminate\Support\Facades\Http;
+use App\Services\UpdateCurrencyExchangeService;
 
 class CurrencyController extends Controller
 {
-    const URI = 'https://api.coingecko.com/api/v3/coins';
-    const BTC = '/bitcoin';
-    const ETH = '/ethereum';
 
-
-    public function updateCurrencyExchange(): void
+    public function __invoke()
     {
-        $bitcoin = self::getCurrencyChangeValue(self::BTC);
-        $ethereum = self::getCurrencyChangeValue(self::ETH);
+        $data = [
+            'success' => true,
+            'message' => "Values have not changed",
+            'status' => 200
+        ];
 
-        $currencyExchange = CurrencyExchange::first()->fill([
-            'euro_bitcoin' => $bitcoin,
-            'euro_ethereum' => $ethereum
-        ]);
+        $service = new UpdateCurrencyExchangeService();
+        $hasChanged = $service->execute();
 
-        if ($currencyExchange->isDirty())
-            $currencyExchange->save();
-    }
+        if ($hasChanged)
+            $data['message'] = "Values have changed";
 
-    /**
-     * Return change value in €
-     */
-    private function getCurrencyChangeValue(string $endpoint): float
-    {
-        try {
-            $currency = Http::get(self::URI . $endpoint)
-                ->throw()
-                ->json();
-        } catch (RequestException $e) {
-            throw new ApiConnectionException($e->getMessage(), $e->getCode());
-        }
-
-        return $currency['market_data']['current_price']['eur'];
+        return response()->json($data, $data['status']);
     }
 }

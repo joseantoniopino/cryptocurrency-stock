@@ -15,7 +15,9 @@
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-center">Name</th>
                             <th class="py-3 px-6 text-center">Current Bitcoin</th>
+                            <th class="py-3 px-6 text-center">Bitcoins in Euros</th>
                             <th class="py-3 px-6 text-center">Current Ethereum</th>
+                            <th class="py-3 px-6 text-center">Ethereums in Euros</th>
                         </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
@@ -24,15 +26,22 @@
                                     {{$user->name}}
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    {{$user->stock->bitcoin}} ₿
+                                    {{number_format($user->stock->bitcoin, 5)}} ₿
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    {{$user->stock->ethereum}} Ξ
+                                    {{number_format($user->stock->bitcoin * $currency->euro_bitcoin, 2)}} €
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    {{number_format($user->stock->ethereum, 5)}} Ξ
+                                </td>
+
+                                <td class="py-3 px-6 text-center">
+                                    {{number_format($user->stock->ethereum * $currency->euro_ethereum, 2)}} €
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button class="bg-blue-500 px-4 py-2 text-xs font-semibold tracking-wider text-white rounded hover:bg-blue-600">Refresh!</button>
+                                    <button id="refresh_button" type="button" class="bg-blue-500 px-4 py-2 text-xs font-semibold tracking-wider text-white rounded hover:bg-blue-600">Refresh!</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -42,3 +51,29 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function refresh(){
+        const http = new XMLHttpRequest();
+        const url = "{{route('currency.update')}}";
+
+        http.open("POST", url, true);
+        http.setRequestHeader('X-CSRF-TOKEN', "{!! csrf_token() !!}")
+        http.send();
+
+        http.onreadystatechange = function (){
+            if (this.readyState === 4){
+                if (this.status === 200){
+                    let res = JSON.parse(this.responseText)
+                    // In the future we could create a div alert that would show the "message" of the json.
+                    // To simplify we reload the page.
+                    window.location.reload()
+                } else {
+                    console.log('Error: status ' + this.status)
+                }
+            }
+
+        }
+    }
+    document.getElementById("refresh_button").addEventListener("click", refresh)
+</script>

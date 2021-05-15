@@ -15,8 +15,8 @@ class CreateCurrencyExchangesTable extends Migration
     {
         Schema::create('currency_exchanges', function (Blueprint $table) {
             $table->id();
-            $table->float('euro_bitcoin', 12, 5);
-            $table->float('euro_ethereum', 12, 5);
+            $table->double('euro_bitcoin', 12, 5);
+            $table->double('euro_ethereum', 12, 5);
             $table->timestamps();
         });
     }

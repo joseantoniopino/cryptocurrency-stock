@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\CurrencyExchange;
 use App\Models\StockPortfolio;
 use App\Models\User;
+use App\Services\UpdateCurrencyExchangeService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         User::factory(9)->create();
         StockPortfolio::factory(10)->create();
         CurrencyExchange::factory(1)->create();
+        (new UpdateCurrencyExchangeService())->execute();
     }
 }

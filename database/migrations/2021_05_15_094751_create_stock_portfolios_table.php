@@ -22,8 +22,8 @@ class CreateStockPortfoliosTable extends Migration
                 ->onUpdate('cascade');
 
             // Only for register as user: Gift of one btc and eth!!
-            $table->float('bitcoin', 12,5)->default(1.00000);
-            $table->float('ethereum', 12,5)->default(1.00000);
+            $table->double('bitcoin', 12,5)->default(1.00000);
+            $table->double('ethereum', 12,5)->default(1.00000);
             $table->timestamps();
         });
     }

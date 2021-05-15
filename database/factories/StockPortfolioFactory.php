@@ -25,8 +25,8 @@ class StockPortfolioFactory extends Factory
 
         return [
             'user_id' => $this->faker->unique()->numberBetween(1, User::count()),
-            'bitcoin' => $this->faker->randomFloat(5, 50.00000, 9999999.99999),
-            'ethereum' => $this->faker->randomFloat(5, 50.00000, 9999999.99999)
+            'bitcoin' => $this->faker->randomFloat(5, 50.00000, 9999.99999),
+            'ethereum' => $this->faker->randomFloat(5, 50.00000, 9999.99999)
         ];
     }
 }
