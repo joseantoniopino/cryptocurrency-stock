@@ -34,7 +34,7 @@ To execute the task, you will have to program a cron. Which is already prepared 
 For a run in
 local can be run (instead of cron): art schedule: work from docker bash, or `make schedule-start` from the host machine.
 
-By last. If we want to execute the update of the values from the command line, an "artisan" command has been prepared. We can execute: `art update: currency`
+By last. If we want to execute the update of the values from the command line, an "artisan" command has been prepared. We can execute: `art update:currency`
 <hr>
 
 ## FILES
