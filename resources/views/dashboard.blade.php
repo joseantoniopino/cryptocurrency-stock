@@ -10,14 +10,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <table class="min-w-max w-full table-auto">
+                    <table class="w-full table-auto border-2 border-gre">
                         <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-center">Name</th>
                             <th class="py-3 px-6 text-center">Current Bitcoin</th>
-                            <th class="py-3 px-6 text-center">Bitcoins in Euros</th>
+                            <th class="py-3 px-6 text-center">Your Bitcoins in Euros</th>
+                            <th class="py-3 px-6 text-center">Actual Bitcoin Value</th>
+
                             <th class="py-3 px-6 text-center">Current Ethereum</th>
-                            <th class="py-3 px-6 text-center">Ethereums in Euros</th>
+                            <th class="py-3 px-6 text-center">Your Ethereums in Euros</th>
+                            <th class="py-3 px-6 text-center">Actual Ethereum value</th>
                         </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light">
@@ -25,18 +28,27 @@
                                 <td class="py-3 px-6 text-center">
                                     {{$user->name}}
                                 </td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 px-6 text-center bg-yellow-200">
                                     {{number_format($user->stock->bitcoin, 5)}} ₿
                                 </td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 px-6 text-center bg-yellow-200">
                                     {{number_format($user->stock->bitcoin * $currency->euro_bitcoin, 2)}} €
                                 </td>
-                                <td class="py-3 px-6 text-center">
+
+                                <td class="py-3 px-6 text-center bg-yellow-200">
+                                    {{number_format($currency->euro_bitcoin, 5)}} €
+                                </td>
+
+                                <td class="py-3 px-6 text-center bg-blue-200">
                                     {{number_format($user->stock->ethereum, 5)}} Ξ
                                 </td>
 
-                                <td class="py-3 px-6 text-center">
+                                <td class="py-3 px-6 text-center bg-blue-200">
                                     {{number_format($user->stock->ethereum * $currency->euro_ethereum, 2)}} €
+                                </td>
+
+                                <td class="py-3 px-6 text-center bg-blue-200">
+                                    {{number_format($currency->euro_ethereum, 5)}} €
                                 </td>
                             </tr>
                             <tr>

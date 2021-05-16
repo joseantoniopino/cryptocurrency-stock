@@ -35,4 +35,9 @@ RUN mkdir -p /appdata/www
 # Config XDEBUG
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
+# Config cron
+COPY ./cronjobs /etc/cron.d/cronjobs
+RUN chmod 0644 /etc/cron.d/cronjobs
+RUN service cron start
+
 WORKDIR /appdata/www

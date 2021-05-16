@@ -36,4 +36,7 @@ build: ## Rebuilds all the containers
 ssh-be: ## bash into the be container
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} bash
 
+schedule-start: ## start schedule task
+	U_ID=${UID} docker exec --user ${UID} ${DOCKER_BE} php artisan schedule:work
+
 
