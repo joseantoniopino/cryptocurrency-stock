@@ -12,6 +12,7 @@ class DashboardController extends Controller
     {
         $currency = CurrencyExchange::first();
         $user = Auth::user();
+
         return view('dashboard', [
             'user' => $user,
             'currency' => $currency

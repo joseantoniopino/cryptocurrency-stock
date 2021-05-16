@@ -33,13 +33,12 @@ class UpdateCurrencyExchangeService
         }
 
         return $hasChanged;
-
     }
 
     /**
      * Return change value in €
      */
-    private function getCurrencyChangeValue(string $endpoint): float
+    protected function getCurrencyChangeValue(string $endpoint): float
     {
         try {
             $currency = Http::get(self::URI . $endpoint)

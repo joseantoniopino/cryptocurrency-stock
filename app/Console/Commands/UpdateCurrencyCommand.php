@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Services\UpdateCurrencyExchangeService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 class UpdateCurrencyCommand extends Command
 {

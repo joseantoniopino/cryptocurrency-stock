@@ -11,12 +11,7 @@ use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         User::factory()->create([
             'name' => 'Jose',
@@ -29,6 +24,7 @@ class DatabaseSeeder extends Seeder
         User::factory(9)->create();
         StockPortfolio::factory(10)->create();
         CurrencyExchange::factory(1)->create();
+
         (new UpdateCurrencyExchangeService())->execute();
     }
 }

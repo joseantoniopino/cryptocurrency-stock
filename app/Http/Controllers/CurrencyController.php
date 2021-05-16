@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Services\UpdateCurrencyExchangeService;
+use Illuminate\Http\JsonResponse;
 
 class CurrencyController extends Controller
 {
 
-    public function __invoke()
+    public function __invoke(): JsonResponse
     {
         $data = [
             'success' => true,
