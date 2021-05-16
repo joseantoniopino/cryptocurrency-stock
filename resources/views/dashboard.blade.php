@@ -51,13 +51,11 @@
                                     {{number_format($currency->euro_ethereum, 5)}} €
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <button id="refresh_button" type="button" class="bg-blue-500 px-4 py-2 text-xs font-semibold tracking-wider text-white rounded hover:bg-blue-600">Refresh!</button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
+                    <div>
+                        <button id="refresh_button" type="button" class="bg-blue-500 px-4 py-2 mt-6 text-xs font-semibold tracking-wider text-white rounded hover:bg-blue-600">Refresh!</button>
+                    </div>
                 </div>
             </div>
         </div>
